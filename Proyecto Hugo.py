@@ -25,3 +25,23 @@ client.on_message = on_message
 client.connect(broker_address)
 # Loop para siguiente funcion
 client.loop_start()
+
+
+# Loop que se encarga de procesar la opcion escogida, topicos y mensajes
+while True:
+  choice = menu()
+
+  if choice == '1':
+    topic = input("Introduzca el topico al cual quiera suscribirse: ")
+    client.subscribe(topic)
+    print(f"Suscrito a {topic}")
+  elif choice == '2':
+    #topic = input("Introduzca el topico a donde quiera mandar su mensaje: ")
+    message = input("Introduzca su mensaje: ")
+    client.publish(topic, message)
+  elif choice == '3':
+    print("Saliendo...")
+    client.loop_stop()
+    break
+  else:
+    print("Comando invalido. Favor de intentarlo nuevamente")
